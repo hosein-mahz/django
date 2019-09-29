@@ -10,7 +10,7 @@ def getAll(request):
     result = []
     for x in data:
         e = x['fields']['user']
-        e = loads(serializers.serialize("json", [Caffe.objects.get(id=e)]))
+        # e = loads(serializers.serialize("json", [Caffe.objects.get(id=e)]))
         x['fields']['id']=x['pk']
         x['fields']['user']=e[0]
         result.append(x['fields'])

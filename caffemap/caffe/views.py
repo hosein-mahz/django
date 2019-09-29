@@ -15,18 +15,16 @@ def getAll(request):
     # 
     g = serializers.serialize("json", Caffe.objects.all())
     data = loads(g)
-    result = []
+    o = []
     for x in data:
-        e = x['fields']['user']
-        e = loads(serializers.serialize("json", [Profile.objects.get,(id=e)]))
         x['fields']['id']=x['pk']
-        x['fields']['user']=e[0]
-        result.append(x['fields'])
-    return JsonResponse(result, safe=False)
-    # 
-    # with mock data
-    # 
-    # return JsonResponse(database, safe=False)
+        for y in x['fields']['user']:
+            a = loads(serializers.serialize("json", [Profile.objects.get(id=y)]))
+            o.append(a[0]['fields'])
+        x['fields']['user']=o
+        o = []
+        # x['fields'].append(o)
+    return JsonResponse(data, safe=False)
 
 def getSingle(request, __id):
     g = serializers.serialize("json",[Caffe.objects.get(id=__id)])
