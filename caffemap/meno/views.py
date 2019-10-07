@@ -1,13 +1,8 @@
 from django.http import HttpResponse , JsonResponse
 from django.core import serializers
-from .models import Profile
+from user.models import Profile
 from caffe.models import Caffe
 from json import loads
-
-def dev(request):
-    g = serializers.serialize("json", Profile.objects.all())
-    data = loads(g) 
-    return JsonResponse(data, safe=False)
 
 def getAll(request):
     # 
@@ -26,8 +21,5 @@ def getAll(request):
         # x['fields'].append(o)
     return JsonResponse(data, safe=False)
 
-def getSingle(request, __id):
-    g = serializers.serialize("json",[Profile.objects.get(id=__id)])
-    data = loads(g)
-    data[0]['fields']['id']=data[0]['pk']
-    return JsonResponse(data[0]['fields'], safe=False)
+
+

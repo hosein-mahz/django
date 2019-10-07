@@ -4,7 +4,7 @@ from django.db import models
 class Profile(models.Model):
     name = models.CharField(max_length=30)
     lastname = models.CharField(max_length=30)
-    user = models.CharField(max_length=10)
+    username = models.CharField(max_length=10)
     password = models.CharField(max_length=30)
     email = models.CharField(max_length=120)
-    # brandname = models.ManyToManyField(Caffe)
+    # brandname = models.CharField(Caffe)

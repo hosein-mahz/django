@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'caffe',
     'user',
+    'meno'
 ]
 
 MIDDLEWARE = [
