@@ -1,9 +1,7 @@
 from django.contrib import admin
-from user.models import Profile
-from caffe.models import Caffe
+from .models import Profile
 
 admin.site.register(Profile)
-admin.site.register(Caffe)
 
 # from django.contrib import admin
 # from django.db.models import get_models, get_app

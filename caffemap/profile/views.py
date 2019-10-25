@@ -1,4 +1,4 @@
-from django.http import HttpResponse , JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from .models import Profile
 from caffe.models import Caffe
@@ -24,6 +24,11 @@ def getAll(request):
         x['fields']['caffe']=o
         o = []
         # x['fields'].append(o)
+        # 
+        # FIXME:
+        # 
+        # Profile.objects.get(id=1).caffe_set.all()
+        # 
     return JsonResponse(data, safe=False)
 
 def getSingle(request, __id):

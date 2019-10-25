@@ -82,8 +82,14 @@ target/
 *.log
 *.pot
 *.pyc
-__pycache__/
+__pycache__
 local_settings.py
 
-.env
-# db.sqlite3
+### envirnoment ###
+# .env
+
+### database ###
+# *.sqlite3
+
+### VirtualEnv ###
+VENV

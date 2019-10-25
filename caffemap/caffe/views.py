@@ -1,7 +1,7 @@
 from django.http import HttpResponse , JsonResponse
 from django.core import serializers
 from .models import Caffe
-from user.models import Profile
+from profile.models import Profile
 from json import loads
 
 def dev(request):
