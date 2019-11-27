@@ -8,22 +8,13 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "port": 3000,
-            "program": "${workspaceFolder}\\manage.py",
+            "port": 9229,
+            "program": "${workspaceFolder}\\caffemap\\manage.py",
             "args": [
                 "runserver",
                 "--noreload"
             ],
             "django": true
-        },
-        {
-            "name": "Extension",
-            "type": "extensionHost",
-            "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": [
-              "--extensionDevelopmentPath=${workspaceFolder}"
-            ]
         }
     ]
 }
