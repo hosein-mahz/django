@@ -22,11 +22,10 @@ urlpatterns = [
     # 
     path('profile/', view_profile.getAll),
     path('profile/dev/', view_profile.dev),
-    path('profile/get/<int:id>', view_profile.getSingle),
-    # path('profile/',view_profile.getAll),
-    # path('profile/create/', view_profile.create),
-    # path('profile/delete/<int:_id>',view_profile.delete),
-    # path('profile/update/<int:_id>', view_profile.update),
+    path('profile/get/<int:_id>', view_profile.getSingle),
+    path('profile/create/', view_profile.create),
+    path('profile/delete/<int:_id>', view_profile.delete),
+    path('profile/update/<int:_id>', view_profile.update),
 
     # 
     # M E N U

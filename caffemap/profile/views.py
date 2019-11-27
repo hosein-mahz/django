@@ -4,31 +4,29 @@ from .models import Profile
 from caffe.models import Caffe
 from json import loads
 
+def convertToJson(_QuerySet):
+    g = serializers.serialize("json", _QuerySet)
+    _data = loads(g) 
+    return _data
+
 def dev(request):
-    g = serializers.serialize("json", Profile.objects.all())
-    data = loads(g) 
+    data = convertToJson(Profile.objects.all())
     return JsonResponse(data, safe=False)
 
 def getAll(request):
-    # 
-    # with database model
-    # 
-    g = serializers.serialize("json", Profile.objects.all())
-    data = loads(g)
+    data = convertToJson(Profile.objects.all())
     for x in data:
-        x['fields']['id']=x['pk']
-        l = serializers.serialize("json", Profile.objects.get(pk=x['pk']).caffe_set.all() )
-        l = loads(l)
+        l = convertToJson( Profile.objects.get(pk=x['pk']).caffe_set.all() )
+        l = helperId(l)
         x['fields']['caffe'] = []
         for y in l:
             x['fields']['caffe'].append(y['fields'])
         
     return JsonResponse(data, safe=False)
 
-def getSingle(request, __id):
-    g = serializers.serialize("json",[Profile.objects.get(id=__id)])
-    data = loads(g)
-    data[0]['fields']['id']=data[0]['pk']
+def getSingle(request, _id):
+    data = convertToJson( Profile.objects.get(id=_id) )
+    data[0] = helperId(data[0])
     return JsonResponse(data[0]['fields'], safe=False)
 
 def create(request):
@@ -37,9 +35,48 @@ def create(request):
             data = loads(request.body)
             if data['name'] == '' or hasattr(data, 'name') :
                 return JsonResponse({'message':'unsuccessful createing'}, safe=False)
-            _Profile = Profile(name = data['name'], lastname = data['lastname'], username = data['username'], password = data['password'], email = data['email'])
+            _Profile = Profile(
+                name = data['name'],
+                lastname = data['lastname'],
+                username = data['username'],
+                password = data['password'],
+                email = data['email'])
             _Profile.save()
             return JsonResponse({'message':'successful create new Profile'}, safe=False)
         except:
             return JsonResponse({'message':'unsuccessful createing'}, safe=False)
     return JsonResponse({'message': 'most use POST method'}, safe=False)
+
+def delete(request, _id): 
+    if request.method == 'DELETE':
+        try:
+            Profile.objects.filter(pk=_id).delete()
+            return JsonResponse({'message': 'successfull deleting'}, safe=False)
+        except:
+            return JsonResponse({'message': 'unsuccessfull deleting'}, safe=False)
+    return JsonResponse({'message': 'most use DELETE method'}, safe=False)
+
+def update(request, _id):
+    if request.method == 'PUT':
+        try:
+            data = loads(request.body)
+            Profile.objects.filter(id=_id).update(
+                name=data['name'],
+                lastname=data['lastname'],
+                username=data['username'],
+                password=data['password'],
+                email=data['email']
+            )
+            return JsonResponse({'message': 'successfull updating'}, safe=False)
+        except : 
+            return JsonResponse({'message': 'unsuccessfull updating'}, safe=False)
+
+
+# 
+# 
+#  Helper Methods
+# 
+# 
+def helperId(_object):
+    _object['fields']['id']=_object['pk']
+    return _object
