@@ -1,6 +1,14 @@
 
 # Profile
 
+* Profile
+    * name
+    * lastname
+    * username
+    * password
+    * email
+    * phone
+
 # Caffee (Resturant)
 
 * Caffee 
@@ -9,6 +17,8 @@
     * address
     * user
     * avatar/logo/icon
+    * location_x
+    * location_y
 
 * CaffeeFile
     * caffee_id
@@ -20,7 +30,7 @@
     * category (choise)
     * desk_name
 
-* Staff
+* Staff (v2)
     * name
     * position
     * certification
@@ -48,5 +58,18 @@
 
 # Delivery
 
-* FoodOrder
-    *
+* Order
+    * profile_id
+    * dateTime
+    * price
+    * delivery
+
+* OrderSchedual
+    * order_id
+    * priority = 1
+    * order_detail_id
+    * dateTime
+
+* OrderDetails
+    * food_id
+    * qty
