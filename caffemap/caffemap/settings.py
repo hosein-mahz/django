@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'caffe',
     'profile',
-    'menu'
+    'menu',
 ]
 
 MIDDLEWARE = [
