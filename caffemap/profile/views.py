@@ -13,6 +13,13 @@ def dev(request):
     data = convertToJson(Profile.objects.all())
     return JsonResponse(data, safe=False)
 
+# 
+#  Helper Methods
+#  
+def helperId(_object):
+    _object['fields']['id']=_object['pk']
+    return _object
+
 def getAll(request):
     data = convertToJson(Profile.objects.all())
     for x in data:
@@ -70,13 +77,3 @@ def update(request, _id):
             return JsonResponse({'message': 'successfull updating'}, safe=False)
         except : 
             return JsonResponse({'message': 'unsuccessfull updating'}, safe=False)
-
-
-# 
-# 
-#  Helper Methods
-# 
-# 
-def helperId(_object):
-    _object['fields']['id']=_object['pk']
-    return _object
