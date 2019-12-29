@@ -8,19 +8,15 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('caffe', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name='Menu',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=30)),
-                ('lastname', models.CharField(max_length=30)),
-                ('username', models.CharField(max_length=10)),
-                ('password', models.CharField(max_length=30)),
-                ('email', models.CharField(max_length=120)),
-                ('phone', models.CharField(max_length=30)),
+                ('Caffe_id', models.ForeignKey(null=True, on_delete=True, to='caffe.Caffe')),
             ],
         ),
     ]

@@ -1,9 +1,13 @@
 from django.http import HttpResponse , JsonResponse
 from django.core import serializers
-from .models import Caffe
 from profile.models import Profile
 from json import loads
+from caffe.models import Caffe
+from rest_framework import viewsets
+from caffe.serializers import CaffeSerializer
 
+
+# //////////////////////////////////////////////////
 def dev(request):
     g = serializers.serialize("json", Caffe.objects.all())
     data = loads(g) 
@@ -66,3 +70,8 @@ def update(request, _id):
             return JsonResponse({'message': 'successfull updating'}, safe=False)
         except : 
             return JsonResponse({'message': 'unsuccessfull deleting'}, safe=False)
+# ///////////////////////////////////////////////////////////
+
+class caffeViewSet(viewsets.ModelViewSet):
+    queryset = Caffe.objects.all().order_by('-name')
+    serializer_class = CaffeSerializer

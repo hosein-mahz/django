@@ -3,6 +3,9 @@ from django.core import serializers
 from .models import Profile
 from caffe.models import Caffe
 from json import loads
+from .models import Profile
+from rest_framework import viewsets
+from .serializers import ProfileSerializer
 
 def convertToJson(_QuerySet):
     g = serializers.serialize("json", _QuerySet)
@@ -20,6 +23,7 @@ def helperId(_object):
     _object['fields']['id']=_object['pk']
     return _object
 
+# ///////////////////////////////////////
 def getAll(request):
     data = convertToJson(Profile.objects.all())
     for x in data:
@@ -77,3 +81,8 @@ def update(request, _id):
             return JsonResponse({'message': 'successfull updating'}, safe=False)
         except : 
             return JsonResponse({'message': 'unsuccessfull updating'}, safe=False)
+# ///////////////////////////////////////
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all().order_by('-name')
+    serializer_class = ProfileSerializer

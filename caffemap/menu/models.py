@@ -9,7 +9,7 @@ from caffe.models import Caffe
 #     (5, 'fast food'),
 #     (6, 'Cake'),
 #     (7, 'Appetizer'),
-]
+# ]
 
 
 class Menu(models.Model):
